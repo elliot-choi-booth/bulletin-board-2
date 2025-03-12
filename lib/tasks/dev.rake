@@ -9,6 +9,17 @@ task({ :sample_data => :environment }) do
   Board.destroy_all
   Post.destroy_all
   
+  usernames = ["alice", "bob", "carol", "dave", "eve"]
+
+  usernames.each do |username|
+      
+    user = User.new
+    user.email = "#{username}@example.com"
+    user.password = "password"
+    user.save
+
+  end
+
   5.times do
     board = Board.new
     board.name = Faker::Address.community
@@ -25,6 +36,7 @@ task({ :sample_data => :environment }) do
     end
   end
 
+  puts "There are now #{User.count} rows in the boards table."
   puts "There are now #{Board.count} rows in the boards table."
   puts "There are now #{Post.count} rows in the posts table."
 end
